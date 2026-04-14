@@ -16,12 +16,14 @@ import Mapa from "./components/home/Mapa";
 import Instagram from "./components/home/Instagram";
 import Destaques from "./components/home/Destaques";
 import AdminPanel from "./components/admin/AdminPanel";
+import SEOMeta from "./components/layout/SEOMeta";
 
 function PublicSite() {
   const { siteData, theme, setTheme, phoneLinks, whatsappMessage } = useContext(SiteContext);
   
   return (
     <div className="app-shell" id="top">
+      <SEOMeta siteData={siteData} />
       <Header siteData={siteData} theme={theme} setTheme={setTheme} />
       <StickyCard notices={siteData.notices} />
       <Hero siteData={siteData} />
@@ -61,6 +63,7 @@ function AdminRoute() {
              setAdminTab={ctx.setAdminTab}
              editor={ctx.editor}
              handleEditorChange={ctx.handleEditorChange}
+             setEditor={ctx.setEditor}
              saveEditor={ctx.saveEditor}
              resetEditor={ctx.resetEditor}
           />

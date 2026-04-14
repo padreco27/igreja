@@ -11,9 +11,25 @@ export default function AdminPanel({
   setAdminTab,
   editor,
   handleEditorChange,
+  setEditor,
   saveEditor,
   resetEditor
 }) {
+  const updateMassTime = (index, field, value) => {
+    const newMassTimes = [...(editor.massTimes || [])];
+    newMassTimes[index] = { ...newMassTimes[index], [field]: value };
+    setEditor({ ...editor, massTimes: newMassTimes });
+  };
+  const removeMassTime = (index) => {
+    const newMassTimes = [...(editor.massTimes || [])];
+    newMassTimes.splice(index, 1);
+    setEditor({ ...editor, massTimes: newMassTimes });
+  };
+  const addMassTime = () => {
+    const newMassTimes = [...(editor.massTimes || []), { id: Date.now().toString(), day: "", time: "", location: "" }];
+    setEditor({ ...editor, massTimes: newMassTimes });
+  };
+
   return (
     <section id="admin" className="card full admin-card reveal">
       <h2>Administrador</h2>
@@ -170,6 +186,18 @@ export default function AdminPanel({
                     onChange={handleEditorChange}
                     placeholder="Texto principal das celebrações"
                   />
+                  <div style={{ background: 'rgba(255,255,255,0.05)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border)', marginTop: '10px' }}>
+                    <h4 style={{ marginBottom: '10px' }}>Grade de Horários Base</h4>
+                    {(editor.massTimes || []).map((mt, index) => (
+                      <div key={index} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 2fr auto', gap: '5px', marginBottom: '8px' }}>
+                        <input value={mt.day} onChange={(e) => updateMassTime(index, 'day', e.target.value)} placeholder="Dia" />
+                        <input value={mt.time} onChange={(e) => updateMassTime(index, 'time', e.target.value)} placeholder="08h00" />
+                        <input value={mt.location} onChange={(e) => updateMassTime(index, 'location', e.target.value)} placeholder="Local/Igreja" />
+                        <button type="button" onClick={() => removeMassTime(index)} style={{ background: '#d24747', color: 'white', border: 'none', borderRadius: '5px', padding: '0 10px', cursor: 'pointer' }}>X</button>
+                      </div>
+                    ))}
+                    <button type="button" onClick={addMassTime} className="btn-secondary" style={{ padding: '0.4rem 1rem', fontSize: '0.85rem' }}>+ Adicionar</button>
+                  </div>
                   <input
                     name="forania"
                     value={editor.forania}

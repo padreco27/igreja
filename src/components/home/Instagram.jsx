@@ -24,7 +24,7 @@ export default function Instagram({ siteData }) {
         target="_blank"
         rel="noreferrer"
       >
-        Ver perfil @paroquiansra.docarmo
+        Ver perfil oficial no Instagram
       </a>
     </section>
   );
