@@ -290,9 +290,14 @@ h1 {
 .main-grid {
   margin-top: 2.4rem;
   margin-bottom: 2.6rem;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.35rem;
+}
+
+.main-grid > * {
+  flex: 1 1 calc(50% - 0.7rem);
+  min-width: 0; /* Prevents flex children from overflowing */
 }
 
 .card {
@@ -398,17 +403,18 @@ h1 {
 }
 
 .full {
-  grid-column: 1 / -1;
+  flex: 1 1 100% !important;
 }
 
 .highlights {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin-top: 0.95rem;
 }
 
 .highlights article {
+  flex: 1 1 calc(33.333% - 0.7rem);
   background: linear-gradient(180deg, rgba(183, 154, 87, 0.08), rgba(183, 154, 87, 0.02));
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -490,9 +496,13 @@ h1 {
 }
 
 .footer-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.2rem;
+}
+
+.footer-grid > * {
+  flex: 1 1 calc(33.333% - 0.8rem);
 }
 
 .footer h3 {
@@ -537,7 +547,11 @@ h1 {
   .main-grid,
   .highlights,
   .footer-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+  
+  .main-grid > * {
+    flex: 1 1 100%;
   }
 
   .hero {
@@ -644,5 +658,9 @@ h1 {
     bottom: 82px;
     width: 40px;
     height: 40px;
+  }
+
+  .main-grid {
+    margin-bottom: 150px; /* Espaço extra para botões fixos (WhatsApp, StickyCard, etc) */
   }
 }

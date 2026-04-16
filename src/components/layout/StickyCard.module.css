@@ -38,8 +38,10 @@
 }
 @media(max-width: 768px) {
   .card {
-     bottom: 80px; 
-     left: 15px;
-     max-width: calc(100vw - 100px);
+     bottom: 160px; /* Posição acima dos botões de WhatsApp e Voltar ao Topo */
+     right: 20px;
+     left: auto;
+     max-width: 260px;
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
 }
