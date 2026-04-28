@@ -89,8 +89,27 @@ export default function Celebracoes({ siteData }) {
       }
     });
 
+    // Adicionar eventos especiais
+    if (siteData.specialEvents) {
+      siteData.specialEvents.forEach(sp => {
+        if (sp.startMonth === month || sp.endMonth === month) {
+          const sDay = sp.startMonth === month ? sp.startDay : 1;
+          const eDay = sp.endMonth === month ? sp.endDay : totalDays;
+          
+          for (let d = sDay; d <= eDay; d++) {
+            if (!events[d]) events[d] = [];
+            events[d].push({
+              isSpecial: true,
+              title: sp.title,
+              location: sp.location || "Evento Paroquial"
+            });
+          }
+        }
+      });
+    }
+
     return events;
-  }, [massTimes, month, year]);
+  }, [massTimes, siteData.specialEvents, month, year]);
 
   // Gerar grade do calendário
   const firstDayOfMonth = new Date(year, month, 1).getDay();
@@ -129,7 +148,10 @@ export default function Celebracoes({ siteData }) {
                 className={`${styles.dayCell} ${selectedDay === d ? styles.selected : ""} ${monthEvents[d] ? styles.hasEvent : ""}`}
               >
                 {d}
-                {monthEvents[d] && <span className={styles.eventDot}></span>}
+                <div style={{ display: "flex", gap: "2px", justifyContent: "center", marginTop: "2px" }}>
+                  {monthEvents[d]?.some(e => !e.isSpecial) && <span className={styles.eventDot}></span>}
+                  {monthEvents[d]?.some(e => e.isSpecial) && <span className={styles.eventDot} style={{ background: "var(--accent)" }}></span>}
+                </div>
               </button>
             ))}
           </div>
@@ -139,12 +161,29 @@ export default function Celebracoes({ siteData }) {
         <div className={styles.detailsContainer}>
           <div className={styles.detailsHeader}>
             <CalendarIcon size={20} />
-            <h4>Missas em {selectedDay} de {monthNames[month]}</h4>
+            <h4>Eventos em {selectedDay} de {monthNames[month]}</h4>
           </div>
 
           <div className={styles.eventList}>
             {selectedEvents.length > 0 ? (
               selectedEvents.map((mt, i) => {
+                if (mt.isSpecial) {
+                  return (
+                    <div key={i} className={styles.eventItem} style={{ background: "rgba(212, 175, 55, 0.08)", borderLeftColor: "var(--accent)" }}>
+                      <div className={styles.eventTime} style={{ color: "var(--accent)", fontWeight: "700" }}>
+                        <Info size={16} />
+                        <span>Festa / Evento</span>
+                      </div>
+                      <div className={styles.eventLocation}>
+                        <strong style={{ fontSize: "1rem", color: "var(--primary)", display: "block", marginBottom: "4px" }}>{mt.title}</strong>
+                        <div style={{ fontSize: "0.85rem", color: "var(--muted)", display: "flex", alignItems: "flex-start", gap: "4px" }}>
+                          <span>📍</span> <span>{mt.location}</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+
                 const isMatriz = mt.location.toLowerCase().includes("matriz");
                 return (
                   <div key={i} className={`${styles.eventItem} ${isMatriz ? styles.matrizItem : ""}`}>
@@ -153,7 +192,20 @@ export default function Celebracoes({ siteData }) {
                       <span>{mt.time}</span>
                     </div>
                     <div className={styles.eventLocation}>
-                      <MapPin size={16} />
+                      {mt.mapLink ? (
+                        <a 
+                          href={mt.mapLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className={styles.mapLink}
+                          title="Abrir no Google Maps"
+                          style={{ display: 'inline-flex', color: 'inherit' }}
+                        >
+                          <MapPin size={16} />
+                        </a>
+                      ) : (
+                        <MapPin size={16} />
+                      )}
                       <strong>{mt.location}</strong>
                     </div>
                   </div>

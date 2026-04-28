@@ -9,7 +9,6 @@ import FloatingButtons from "./components/layout/FloatingButtons";
 import StickyCard from "./components/layout/StickyCard";
 
 import Hero from "./components/home/Hero";
-import Avisos from "./components/home/Avisos";
 import Celebracoes from "./components/home/Celebracoes";
 import Secretaria from "./components/home/Secretaria";
 import Mapa from "./components/home/Mapa";
@@ -25,11 +24,10 @@ function PublicSite() {
     <div className="app-shell" id="top">
       <SEOMeta siteData={siteData} />
       <Header siteData={siteData} theme={theme} setTheme={setTheme} />
-      <StickyCard notices={siteData.notices} />
+      <StickyCard siteData={siteData} />
       <Hero siteData={siteData} />
 
       <main className="container main-grid">
-        <Avisos siteData={siteData} />
         <Celebracoes siteData={siteData} />
         <Secretaria siteData={siteData} phoneLinks={phoneLinks} />
         <Mapa siteData={siteData} />

@@ -222,14 +222,16 @@ body[data-theme="dark"] {
   min-height: 480px;
   display: flex;
   align-items: center;
-  background: url("https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&w=1600&q=80&fm=webp")
-    center/cover no-repeat fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(110deg, rgba(10, 20, 16, 0.9), rgba(26, 52, 41, 0.62));
+  background: linear-gradient(110deg, rgba(10, 20, 16, 0.85), rgba(26, 52, 41, 0.5));
 }
 
 .hero-content {
