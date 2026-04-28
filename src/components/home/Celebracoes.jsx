@@ -101,7 +101,8 @@ export default function Celebracoes({ siteData }) {
             events[d].push({
               isSpecial: true,
               title: sp.title,
-              location: sp.location || "Evento Paroquial"
+              location: sp.location || "Evento Paroquial",
+              mapLink: sp.mapLink || ""
             });
           }
         }
@@ -177,7 +178,20 @@ export default function Celebracoes({ siteData }) {
                       <div className={styles.eventLocation}>
                         <strong style={{ fontSize: "1rem", color: "var(--primary)", display: "block", marginBottom: "4px" }}>{mt.title}</strong>
                         <div style={{ fontSize: "0.85rem", color: "var(--muted)", display: "flex", alignItems: "flex-start", gap: "4px" }}>
-                          <span>📍</span> <span>{mt.location}</span>
+                          {mt.mapLink ? (
+                            <a 
+                              href={mt.mapLink}
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              title="Abrir no Google Maps"
+                              style={{ textDecoration: "none", cursor: "pointer" }}
+                            >
+                              <span>📍</span>
+                            </a>
+                          ) : (
+                            <span>📍</span>
+                          )}
+                          <span>{mt.location}</span>
                         </div>
                       </div>
                     </div>

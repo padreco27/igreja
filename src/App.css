@@ -665,4 +665,10 @@ h1 {
   .main-grid {
     margin-bottom: 150px; /* Espaço extra para botões fixos (WhatsApp, StickyCard, etc) */
   }
+
+  /* Correção para o fundo fixo no iOS e dispositivos móveis */
+  .hero {
+    background-attachment: scroll !important;
+    min-height: 400px;
+  }
 }
