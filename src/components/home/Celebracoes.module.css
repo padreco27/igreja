@@ -9,43 +9,49 @@
   margin-top: 0.5rem;
 }
 
+/* Layout principal: lado a lado no desktop, empilhado no mobile */
 .calendarLayout {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: flex-start;
+  width: 100%;
 }
 
-/* Calendar Styling */
+/* ── Calendário ── */
 .calendarContainer {
-  flex: 1.2 1 280px;
+  flex: 1 1 300px;
+  min-width: 0;
+  max-width: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 1.5rem;
+  border-radius: 16px;
+  padding: 1.25rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  min-width: 0;
-  overflow-x: hidden;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .calendarHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .calendarHeader h3 {
   font-family: "Cinzel", serif;
   color: var(--primary);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin: 0;
+  text-align: center;
+  flex: 1;
 }
 
 .navBtn {
   background: var(--bg);
   border: 1px solid var(--border);
-  padding: 0.4rem;
+  padding: 0.35rem;
   border-radius: 50%;
   cursor: pointer;
   color: var(--primary);
@@ -53,6 +59,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .navBtn:hover {
@@ -60,29 +67,33 @@
   color: var(--primary-dark);
 }
 
+/* Grade do calendário: 7 colunas sempre iguais */
 .calendarGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.25rem;
+  gap: 0.2rem;
+  width: 100%;
 }
 
 .dayLabel {
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: var(--muted);
   text-transform: uppercase;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .dayCell {
   aspect-ratio: 1;
   background: none;
   border: 1px solid transparent;
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: var(--text);
   display: flex;
   flex-direction: column;
@@ -90,6 +101,9 @@
   justify-content: center;
   position: relative;
   transition: all 0.2s ease;
+  padding: 0;
+  min-width: 0;
+  width: 100%;
 }
 
 .dayCell:hover {
@@ -110,52 +124,56 @@
 }
 
 .eventDot {
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   background: var(--accent);
   border-radius: 50%;
   position: absolute;
-  bottom: 6px;
+  bottom: 4px;
 }
 
 .dayCellBlank {
   aspect-ratio: 1;
 }
 
-/* Details Panel */
+/* ── Painel de Detalhes ── */
 .detailsContainer {
-  flex: 1 1 240px;
+  flex: 1 1 260px;
+  min-width: 0;
+  max-width: 100%;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 1.5rem;
-  min-height: 400px;
+  border-radius: 16px;
+  padding: 1.25rem;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
-  min-width: 0;
-  overflow-x: hidden;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .detailsHeader {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
   color: var(--primary);
   border-bottom: 2px solid var(--accent-soft);
   padding-bottom: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .detailsHeader h4 {
   font-family: "Cinzel", serif;
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  word-break: break-word;
 }
 
 .eventList {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.85rem;
   flex: 1;
 }
 
@@ -163,15 +181,17 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 1rem;
+  padding: 0.85rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
   transition: transform 0.2s ease;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .eventItem:hover {
-  transform: translateX(5px);
+  transform: translateX(4px);
   border-color: var(--accent);
 }
 
@@ -183,19 +203,20 @@
 .eventTime {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   color: var(--accent);
   font-family: "Cinzel", serif;
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .eventLocation {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  align-items: flex-start;
+  gap: 0.4rem;
   color: var(--text);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  word-break: break-word;
 }
 
 .emptyState {
@@ -205,47 +226,92 @@
   justify-content: center;
   text-align: center;
   color: var(--muted);
-  gap: 1rem;
-  padding: 3rem 1rem;
+  gap: 0.75rem;
+  padding: 2.5rem 1rem;
 }
 
 .calendarFooter {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--border);
 }
 
+/* ═══════════════════════════════════════
+   RESPONSIVO — tela menor que 900px
+   (calendário e detalhes empilhados)
+═══════════════════════════════════════ */
 @media (max-width: 900px) {
   .calendarLayout {
     flex-direction: column;
+    gap: 1rem;
   }
-  
+
   .calendarContainer,
   .detailsContainer {
-    flex: 1 1 100%;
+    flex: none;
     width: 100%;
+    max-width: 100%;
   }
-  
+
   .detailsContainer {
     min-height: auto;
   }
 }
 
+/* ═══════════════════════════════════════
+   RESPONSIVO — tela menor que 480px
+   (celulares pequenos)
+═══════════════════════════════════════ */
 @media (max-width: 480px) {
   .calendarContainer {
-    padding: 0.75rem;
+    padding: 0.85rem 0.6rem;
+  }
+
+  .detailsContainer {
+    padding: 0.85rem;
+  }
+
+  .calendarHeader h3 {
+    font-size: 0.95rem;
   }
 
   .calendarGrid {
-    gap: 0.15rem;
-  }
-  
-  .dayCell {
-    font-size: 0.8rem;
-    border-radius: 8px;
+    gap: 0.1rem;
   }
 
   .dayLabel {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
+    padding-bottom: 0.3rem;
+  }
+
+  .dayCell {
+    font-size: 0.75rem;
+    border-radius: 6px;
+  }
+
+  .eventDot {
+    width: 3px;
+    height: 3px;
+    bottom: 3px;
+  }
+
+  .sectionHeader h2 {
+    font-size: 1.3rem;
+  }
+
+  .detailsHeader h4 {
+    font-size: 0.9rem;
+  }
+
+  .eventTime {
+    font-size: 0.9rem;
+  }
+
+  .eventLocation {
+    font-size: 0.85rem;
+  }
+
+  .eventItem {
+    padding: 0.7rem;
   }
 }

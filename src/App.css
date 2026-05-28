@@ -45,6 +45,7 @@ body[data-theme="dark"] {
 .container {
   width: min(1120px, 92%);
   margin: 0 auto;
+  max-width: 100%;
 }
 
 .topbar {
@@ -639,6 +640,14 @@ h1 {
 @media (max-width: 680px) {
   .topbar-content {
     padding: 0.65rem 0;
+  }
+
+  .card {
+    padding: 1rem 0.85rem;
+  }
+
+  .container {
+    width: 94%;
   }
 
   .theme-toggle {
