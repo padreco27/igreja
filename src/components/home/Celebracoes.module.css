@@ -18,13 +18,14 @@
 
 /* Calendar Styling */
 .calendarContainer {
-  flex: 1.2 1 450px;
+  flex: 1.2 1 280px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   min-width: 0;
+  overflow-x: hidden;
 }
 
 .calendarHeader {
@@ -62,7 +63,7 @@
 .calendarGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 .dayLabel {
@@ -123,7 +124,7 @@
 
 /* Details Panel */
 .detailsContainer {
-  flex: 1 1 350px;
+  flex: 1 1 240px;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 20px;
@@ -132,6 +133,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  overflow-x: hidden;
 }
 
 .detailsHeader {
@@ -231,10 +233,19 @@
 
 @media (max-width: 480px) {
   .calendarContainer {
-    padding: 1rem;
+    padding: 0.75rem;
+  }
+
+  .calendarGrid {
+    gap: 0.15rem;
   }
   
   .dayCell {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
+  }
+
+  .dayLabel {
+    font-size: 0.65rem;
   }
 }

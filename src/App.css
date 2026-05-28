@@ -16,11 +16,18 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   font-family: "Inter", sans-serif;
   color: var(--text);
   background: radial-gradient(circle at top, #f9faf7 0%, var(--bg) 45%);
   line-height: 1.6;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body[data-theme="dark"] {
@@ -467,7 +474,7 @@ h1 {
   border: 1px solid rgb(219, 219, 219);
   display: block;
   width: 100%;
-  min-width: 326px;
+  min-width: 0;
   height: 620px;
   margin: 0 auto 12px;
 }
@@ -651,7 +658,8 @@ h1 {
   }
 
   .insta-embed-frame {
-    min-width: 100%;
+    min-width: 0;
+    width: 100%;
     height: 560px;
   }
 
